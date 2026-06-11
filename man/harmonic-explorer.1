@@ -1,0 +1,37 @@
+.TH HARMONIC-EXPLORER 1 "June 2026" "harmonic-explorer 2.0.0" "User Commands"
+.SH NAME
+harmonic-explorer \- explore harmonics, dissonance and chords on a guitar fretboard
+.SH SYNOPSIS
+.B harmonic-explorer
+.SH DESCRIPTION
+.B harmonic-explorer
+opens an interactive tool for understanding why notes sound consonant or
+dissonant together, seen through the lens of a guitar fretboard.
+.PP
+The application offers:
+.IP \(bu 2
+a clickable guitar fretboard with capo and key selection,
+.IP \(bu 2
+additive synthesis with selectable waveforms and an ADSR envelope editor,
+.IP \(bu 2
+live waveform and spectrum visualization,
+.IP \(bu 2
+a live Plomp\(enLevelt dissonance curve for the selected notes,
+.IP \(bu 2
+a chord builder with consonance/dissonance analysis of every interval,
+.IP \(bu 2
+melody playback in the selected key.
+.PP
+The interface opens in a dedicated WebKitGTK window. If WebKitGTK is not
+available, the application falls back to opening in the default web browser
+via
+.BR xdg-open (1).
+Everything runs offline; no network connections are made.
+.SH FILES
+.TP
+.I /usr/share/harmonic-explorer/index.html
+The application itself, a self-contained HTML document.
+.SH SEE ALSO
+.BR xdg-open (1)
+.SH AUTHOR
+Jonathan Schnitzler <jonathanschnitzler5@gmail.com>

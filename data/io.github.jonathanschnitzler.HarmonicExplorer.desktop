@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Harmonic Explorer
+GenericName=Guitar Harmony Tool
+Comment=Explore harmonics, dissonance and chords on a guitar fretboard
+Exec=harmonic-explorer
+Icon=io.github.jonathanschnitzler.HarmonicExplorer
+Terminal=false
+Categories=AudioVideo;Audio;Music;
+Keywords=guitar;harmony;chord;dissonance;fretboard;music theory;overtones;
+StartupWMClass=io.github.jonathanschnitzler.HarmonicExplorer

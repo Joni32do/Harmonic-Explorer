@@ -1,0 +1,94 @@
+#!/usr/bin/python3
+"""Harmonic Explorer launcher.
+
+Opens the bundled single-file HTML app in a dedicated WebKitGTK window.
+Tries WebKit 6.0 (GTK 4) first, then WebKit2 4.1 (GTK 3), and finally
+falls back to the default browser via xdg-open.
+"""
+
+import os
+import subprocess
+import sys
+
+APP_ID = "io.github.jonathanschnitzler.HarmonicExplorer"
+APP_TITLE = "Harmonic Explorer"
+INSTALLED_HTML = "/usr/share/harmonic-explorer/index.html"
+
+
+def find_app_html():
+    """Return the path to index.html, preferring a source-tree copy
+    so the launcher also works uninstalled (bin/harmonic-explorer)."""
+    source_tree = os.path.normpath(
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir, "index.html")
+    )
+    for candidate in (source_tree, INSTALLED_HTML):
+        if os.path.isfile(candidate):
+            return candidate
+    sys.exit(f"harmonic-explorer: app file not found at {INSTALLED_HTML}")
+
+
+def run_gtk4(uri):
+    import gi
+
+    gi.require_version("Gtk", "4.0")
+    gi.require_version("WebKit", "6.0")
+    from gi.repository import GLib, Gtk, WebKit
+
+    GLib.set_prgname(APP_ID)
+
+    def on_activate(app):
+        win = Gtk.ApplicationWindow(application=app, title=APP_TITLE)
+        win.set_default_size(1280, 860)
+        view = WebKit.WebView()
+        view.get_settings().set_enable_webaudio(True)
+        view.load_uri(uri)
+        win.set_child(view)
+        win.present()
+
+    app = Gtk.Application(application_id=APP_ID)
+    app.connect("activate", on_activate)
+    return app.run([])
+
+
+def run_gtk3(uri):
+    import gi
+
+    gi.require_version("Gtk", "3.0")
+    gi.require_version("WebKit2", "4.1")
+    from gi.repository import GLib, Gtk, WebKit2
+
+    # WM_CLASS must match the .desktop file name for correct dock grouping.
+    GLib.set_prgname(APP_ID)
+
+    win = Gtk.Window(title=APP_TITLE)
+    win.set_default_size(1280, 860)
+    view = WebKit2.WebView()
+    view.get_settings().set_enable_webaudio(True)
+    view.load_uri(uri)
+    win.add(view)
+    win.connect("destroy", Gtk.main_quit)
+    win.show_all()
+    Gtk.main()
+    return 0
+
+
+def main():
+    uri = "file://" + find_app_html()
+    for backend in (run_gtk4, run_gtk3):
+        try:
+            return backend(uri)
+        except (ImportError, ValueError):
+            continue
+    try:
+        subprocess.run(["xdg-open", uri], check=True)
+        return 0
+    except (OSError, subprocess.CalledProcessError):
+        sys.exit(
+            "harmonic-explorer: no WebKitGTK available and xdg-open failed.\n"
+            "Install gir1.2-webkit-6.0 or gir1.2-webkit2-4.1, or open\n"
+            f"{uri} in a browser manually."
+        )
+
+
+if __name__ == "__main__":
+    sys.exit(main())

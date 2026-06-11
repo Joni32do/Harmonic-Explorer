@@ -1,0 +1,29 @@
+Source: harmonic-explorer
+Section: sound
+Priority: optional
+Maintainer: Jonathan Schnitzler <jonathanschnitzler5@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Rules-Requires-Root: no
+
+Package: harmonic-explorer
+Architecture: all
+Depends: ${misc:Depends},
+         python3,
+         python3-gi,
+         gir1.2-webkit-6.0 | gir1.2-webkit2-4.1
+Recommends: xdg-utils
+Description: interactive guitar fretboard for exploring harmony and dissonance
+ Harmonic Explorer is an interactive tool for understanding why notes
+ sound consonant or dissonant together, seen through the lens of a
+ guitar fretboard.
+ .
+ It features a clickable fretboard with capo and key selection, additive
+ synthesis with selectable waveforms and an ADSR envelope editor, live
+ waveform and spectrum visualization, a live Plomp-Levelt dissonance
+ curve for the selected notes, a chord builder with consonance analysis
+ of every interval, and melody playback in the selected key.
+ .
+ The application is a self-contained HTML document rendered in a
+ dedicated WebKitGTK window. It runs fully offline and makes no network
+ connections.

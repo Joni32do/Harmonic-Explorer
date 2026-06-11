@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.jonathanschnitzler.HarmonicExplorer</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Harmonic Explorer</name>
+  <summary>Explore harmonics, dissonance and chords on a guitar fretboard</summary>
+  <description>
+    <p>
+      Harmonic Explorer is an interactive tool for understanding why notes
+      sound consonant or dissonant together, seen through the lens of a
+      guitar fretboard.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Clickable guitar fretboard with capo and key selection</li>
+      <li>Additive synthesis with selectable waveforms and an ADSR envelope editor</li>
+      <li>Live waveform and spectrum visualization</li>
+      <li>Live Plomp–Levelt dissonance curve for the selected notes</li>
+      <li>Chord builder with consonance/dissonance analysis of every interval</li>
+      <li>Melody playback in the selected key</li>
+    </ul>
+    <p>
+      Everything runs offline; the application makes no network connections.
+    </p>
+  </description>
+  <launchable type="desktop-id">io.github.jonathanschnitzler.HarmonicExplorer.desktop</launchable>
+  <provides>
+    <binary>harmonic-explorer</binary>
+  </provides>
+  <categories>
+    <category>Audio</category>
+    <category>Music</category>
+    <category>Education</category>
+  </categories>
+  <developer id="io.github.jonathanschnitzler">
+    <name>Jonathan Schnitzler</name>
+  </developer>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="2.0.0" date="2026-06-11">
+      <description>
+        <p>First packaged release, based on the v2 prototype.</p>
+      </description>
+    </release>
+  </releases>
+</component>

@@ -1,0 +1,7 @@
+# Debian build artifacts
+debian/harmonic-explorer/
+debian/.debhelper/
+debian/files
+debian/debhelper-build-stamp
+debian/*.substvars
+debian/*.debhelper.log

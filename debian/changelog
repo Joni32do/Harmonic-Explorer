@@ -1,0 +1,7 @@
+harmonic-explorer (2.0.0) unstable; urgency=medium
+
+  * Initial packaged release, based on the v2 prototype.
+  * Add WebKitGTK launcher with xdg-open fallback.
+  * Add desktop entry, hicolor icons, AppStream metadata and man page.
+
+ -- Jonathan Schnitzler <jonathanschnitzler5@gmail.com>  Thu, 11 Jun 2026 20:15:37 +0200

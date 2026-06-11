@@ -17,6 +17,8 @@ dedicated WebKitGTK window.
 - Chord builder with consonance/dissonance analysis of every interval
 - Melody playback in the selected key
 
+![Harmonic Explorer screenshot](assets/Screenshot%20from%202026-06-11%2022-42-30.png)
+
 ## Running without installing
 
 Open `index.html` in any modern browser, or run the launcher directly:
@@ -61,11 +63,18 @@ Remove it again with `sudo apt remove harmonic-explorer`.
 | `man/` | Man page |
 | `debian/` | Debian packaging |
 
-## Next steps (not yet done)
+## Roadmap
 
-- Publish to a Launchpad PPA for `apt`-based updates
-- Snap/Flatpak variants
-- CI to build and lint the package on every push
+- [ ] Improve the instrument sound - sound all pretty much the same
+- [ ] Change the layout of the melody
+- [ ] CI to build and lint the package on every push
+- [ ] kind of cool that its all a hard-coded HTML (with JS and CSS) but if this project is serious maintained, change this
+
+### Bugfix
+
+- [ ] Fix the font color being white in white dropdown menus
+- [ ] Fix the E4 string not being rendered
+- [ ] Remove that the screen is "scroolable" - the app should be fixed size and not scrollable
 
 ## License
 

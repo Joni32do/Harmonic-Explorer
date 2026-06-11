@@ -25,6 +25,13 @@ Open `index.html` in any modern browser, or run the launcher directly:
 ./bin/harmonic-explorer
 ```
 
+Note: Ubuntu 24.04+ restricts the user namespaces that WebKitGTK's internal
+sandbox needs. The installed package ships an AppArmor profile
+(`/etc/apparmor.d/harmonic-explorer`) that allows them; when running
+uninstalled, the launcher detects the restriction and falls back to
+disabling WebKit's sandbox (harmless here — the app renders only a trusted
+local file and makes no network requests).
+
 ## Building the Debian package
 
 Build dependencies: `debhelper` (and optionally `devscripts` and `lintian`).
@@ -50,7 +57,7 @@ Remove it again with `sudo apt remove harmonic-explorer`.
 | `index.html` | The application (current version, formerly v2) |
 | `archive/` | Older prototypes, not shipped in the package |
 | `bin/harmonic-explorer` | Launcher: WebKitGTK window with `xdg-open` fallback |
-| `data/` | Desktop entry, hicolor icons, AppStream metadata |
+| `data/` | Desktop entry, hicolor icons, AppStream metadata, AppArmor profile |
 | `man/` | Man page |
 | `debian/` | Debian packaging |
 

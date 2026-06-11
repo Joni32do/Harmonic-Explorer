@@ -1,0 +1,13 @@
+# Allow harmonic-explorer to create the user namespaces that WebKitGTK's
+# bubblewrap sandbox needs, which Ubuntu 24.04+ restricts for processes
+# without an AppArmor profile. The profile is otherwise unconfined.
+
+abi <abi/4.0>,
+include <tunables/global>
+
+profile harmonic-explorer /usr/bin/harmonic-explorer flags=(unconfined) {
+  userns,
+
+  # Site-specific additions and overrides. See local/README for details.
+  include if exists <local/harmonic-explorer>
+}

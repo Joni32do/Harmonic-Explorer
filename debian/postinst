@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+# Load the AppArmor profile that allows WebKitGTK's bubblewrap sandbox to
+# create user namespaces (restricted by default on Ubuntu 24.04+).
+if [ "$1" = "configure" ] && command -v apparmor_parser >/dev/null 2>&1; then
+    if aa-enabled --quiet 2>/dev/null; then
+        apparmor_parser -r -W -T /etc/apparmor.d/harmonic-explorer || true
+    fi
+fi
+
+#DEBHELPER#

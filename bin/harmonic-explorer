@@ -72,8 +72,36 @@ def run_gtk3(uri):
     return 0
 
 
+def ensure_webkit_sandbox_works():
+    """WebKit sandboxes its web process with bubblewrap, which needs user
+    namespaces. Ubuntu 24.04+ restricts those via AppArmor; the packaged
+    install ships /etc/apparmor.d/harmonic-explorer to allow them. When
+    running unpackaged (or unprivileged in a container), fall back to
+    disabling WebKit's sandbox — acceptable here because the app only
+    renders a trusted local file and makes no network requests."""
+    try:
+        userns_ok = (
+            subprocess.run(
+                ["unshare", "-U", "-r", "true"],
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            ).returncode
+            == 0
+        )
+    except OSError:
+        userns_ok = False
+    if not userns_ok:
+        print(
+            "harmonic-explorer: user namespaces unavailable, "
+            "disabling WebKit sandbox",
+            file=sys.stderr,
+        )
+        os.environ["WEBKIT_DISABLE_SANDBOX_THIS_IS_DANGEROUS"] = "1"
+
+
 def main():
     uri = "file://" + find_app_html()
+    ensure_webkit_sandbox_works()
     for backend in (run_gtk4, run_gtk3):
         try:
             return backend(uri)

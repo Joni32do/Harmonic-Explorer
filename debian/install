@@ -3,3 +3,4 @@ bin/harmonic-explorer usr/bin/
 data/io.github.jonathanschnitzler.HarmonicExplorer.desktop usr/share/applications/
 data/io.github.jonathanschnitzler.HarmonicExplorer.metainfo.xml usr/share/metainfo/
 data/icons/hicolor usr/share/icons/
+data/apparmor/harmonic-explorer etc/apparmor.d/
